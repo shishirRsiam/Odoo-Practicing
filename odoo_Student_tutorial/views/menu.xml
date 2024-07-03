@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_odoo_tutorial_root"
+                  name="Odoo Tutorial"
+                  sequence="0" />
+        <menuitem id="menu_add_student"
+                  name="Add Student"
+                  sequence="1"
+                  parent="menu_odoo_tutorial_root"
+                  action="action_view_add_student"/>
+        <menuitem id="menu_add_parent"
+                  name="Add Parent"
+                  sequence="2"
+                  parent="menu_odoo_tutorial_root"
+                  action="action_add_parent"/>
+        <!-- Adding the new menu item "Many Student" 
+        <menuitem id="menu_many_student"
+                  name="Many Student"
+                  sequence="3"
+                  parent="menu_odoo_tutorial_root"
+                  action="action_school_student"/> -->
+    </data>
+</odoo>

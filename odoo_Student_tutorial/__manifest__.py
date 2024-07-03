@@ -1,0 +1,20 @@
+{
+    'name': 'Odoo Tutorial',
+    'version': '1.0',
+    'author': 'Sishir Siam',
+    'category': 'Education',
+    'summary': 'Module for managing school students',
+    'description': 'This module allows managing school students and their details.',
+    'depends': [],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+    'data': [
+        'security/ir.model.access.csv',   
+        'views/add_student.xml',
+        'views/add_parent.xml',
+        'views/menu.xml',
+    ],
+    'demo': [],
+    'assets': {},
+}

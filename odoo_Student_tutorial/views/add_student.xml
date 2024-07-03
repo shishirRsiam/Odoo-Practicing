@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_add_student_tree" model="ir.ui.view">
+        <field name="name">Add Student</field>
+        <field name="model">odoo_tutorial.add.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="roll" />
+                <field name="cls" />
+                <field name="parent" />
+                <field name="phone_number" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_add_student_form" model="ir.ui.view">
+        <field name="name">Name</field>
+        <field name="model">odoo_tutorial.add.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="roll" />
+                        <field name="cls" />
+                        <field name="parent" />
+                        <field name="phone_number" />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_view_add_student" model="ir.actions.act_window">
+        <field name="name">Student Database List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">odoo_tutorial.add.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_school_managementiling_face"> Create your first Student List</p>
+        </field>
+    </record>
+</odoo>
