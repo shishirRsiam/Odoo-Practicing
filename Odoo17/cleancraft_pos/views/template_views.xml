@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the existing POS order form view -->
+        <record id="view_pos_order_form_inherit" model="ir.ui.view">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Update the XPath expression to locate a suitable insertion point -->
+                    <xpath expr="//group[@name='order_fields']" position="replace">
+                        <div class="row">
+                            <div class="col-6">
+                                <group col="4" colspan="4" name="order_fields">
+                                    <field name="name"/>
+                                    <field name="date_order"/>
+                                    <field name="session_id"  readonly="state != 'draft'"/>
+                                    <field string="User" name="user_id" readonly="state in ['done', 'invoiced']"/>
+                                    <field name="partner_id" context="{'res_partner_search_mode': 'customer'}" readonly="state == 'invoiced'"/>
+                                    <field name="fiscal_position_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                </group>
+                            </div>
+                            <div class="col-6">
+                                <group col="4" colspan="4" name="order_fields">
+                                    <field name="order_type"/>
+                                    <field name="delivery_date" invisible="order_type == 'instore'"/>
+                                    <field name="delivery_time" invisible="order_type == 'instore'"/>
+                                    <field name="delivery_note" invisible="order_type == 'instore'"/>
+                                </group>
+                            </div>
+                        </div>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

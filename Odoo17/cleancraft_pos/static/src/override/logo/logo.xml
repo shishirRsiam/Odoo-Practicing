@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="cleancraft_pos.CustomLogo" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+     <xpath expr="//img[hasclass('pos-logo')]" position="attributes">
+         <attribute name="src">https://itscholarbd.com/wp-content/uploads/2023/05/IT-SCHOLAR.png</attribute>
+     </xpath>
+   </t>
+    </templates>
+
+<!--
+python odoo-bin  -r odoo17 -w 123456 --addons-path=addons,cleancraft-platform -u cleancraft_pos
+
+-->

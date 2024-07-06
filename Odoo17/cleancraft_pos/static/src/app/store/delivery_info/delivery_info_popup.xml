@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="cleancraft_pos.DeliveryInfoPopup">
+        <div class="popup delivery-info-popup">
+            <main class="modal-body">
+                <div class="modal-header">
+                    <h4 class="modal-title"><t t-esc="props.title" /></h4>
+                </div>
+                <div class="d-flex flex-column" style="text-align: left;">
+                    <label class="form-label label" for="order_type">Order Type</label>
+                    <select class="detail form-select" id="order_type" t-att-value="order_type"
+                            t-on-change="onSelectionChanged">
+                        <t t-if="typeof currentOrder.orderType !== undefined">
+                            <t t-if="currentOrder.orderType === 'instore'">
+                                <option value="none">None</option>
+                                <option value="instore" selected="True">In store</option>
+                                <option value="delivery">Delivery</option>
+                            </t>
+                            <t t-if="currentOrder.orderType === 'delivery'">
+                                <option value="">None</option>
+                                <option value="instore">In store</option>
+                                <option value="delivery" selected="True">Delivery</option>
+                            </t>
+                        </t>
+                        <t t-if="currentOrder.orderType !== 'instore' and currentOrder.orderType !== 'delivery'">
+                            <option value="" selected="True">None</option>
+                            <option value="instore">In store</option>
+                            <option value="delivery">Delivery</option>
+                        </t>
+                    </select>
+                </div>
+                <t t-if="currentOrder.orderType === 'delivery'">
+                    <div class="flex-column" id="delivery-info" style="text-align: left;">
+                            <div class="d-flex flex-column" style="text-align: left;">
+                            <label class="form-label label" for="delivery_date">Delivery Date</label>
+                                <t t-if="typeof currentOrder.deliveryDate !== undefined">
+                                    <input class="form-control" type="date" id="delivery_date"
+                                           t-att-value="currentOrder.deliveryDate" t-on-input="onSelectionDateTime"/>
+                                </t>
+                                <t t-else="">
+                                    <input class="form-control" type="date" id="delivery_date"
+                                           t-on-input="onSelectionDateTime"/>
+                                </t>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="form-label label" for="delivery_time">Delivery time</label>
+                            <select class="detail form-select" id="delivery_time"
+                                    t-att-value="delivery_time" t-on-change="onSelectionDateTime">
+                                <option value="none">None</option>
+                                <t t-foreach="this.pos.ccPickupTimeSlots" t-as="time" t-key="time.id"
+                                        t-att-value="time.id">
+
+                                        <option t-att-value="time.id" t-att-selected="time.id == currentOrder.deliveryTime"><t t-esc="time.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="form-label label" for="delivery_note">Delivery Note</label>
+                            <t t-if="typeof currentOrder.deliveryNote !== undefined">
+                                <textarea class="form-control" id="delivery_note"
+                                          t-att-value="currentOrder.deliveryNote"/>
+                            </t>
+                            <t t-else="">
+                                <textarea class="form-control" id="delivery_note"/>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </main>
+            <t t-if="currentOrder.orderType === 'delivery' and (currentOrder.deliveryDate === '' or currentOrder.deliveryTime === 'none' or currentOrder.deliveryDate === undefined or currentOrder.deliveryTime === undefined)">
+                    <div role="alert" class="alert alert-danger" id="z-delivery-date-time-required">
+                        Delivery Date and Delivery Time are required
+                    </div>
+                </t>
+            <t t-else="">
+                <div role="alert" class="alert alert-danger" id="z-delivery-date-time-required" style="display: none;">
+                    Delivery Date and Delivery Time are required
+                </div>
+            </t>
+            <footer class="footer delivery-info modal-footer">
+                <t t-if="currentOrder.orderType === 'delivery' and (currentOrder.deliveryDate === '' or currentOrder.deliveryTime == 'none' or currentOrder.deliveryDate === undefined or currentOrder.deliveryTime === undefined)">
+                    <button class="button confirm btn btn-lg btn-primary" disabled="True" id="delivery-info-confirm" t-on-click="confirm">
+                        Confirm
+                    </button>
+                    <button class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                        Discard
+                    </button>
+                </t>
+                <t t-else="">
+                    <t t-if="currentOrder.orderType !== 'delivery' and currentOrder.orderType !== 'instore'">
+                        <button class="button confirm btn btn-lg btn-primary" disabled="True" id="delivery-info-confirm" t-on-click="confirm">
+                            Confirm
+                        </button>
+                        <button class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                            Discard
+                        </button>
+                    </t>
+                    <t t-else="">
+                        <button class="button confirm btn btn-lg btn-primary" id="delivery-info-confirm" t-on-click="confirm">
+                            Confirm
+                        </button>
+                        <button class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                            Discard
+                        </button>
+                    </t>
+                </t>
+            </footer>
+        </div>
+    </t>
+</templates>

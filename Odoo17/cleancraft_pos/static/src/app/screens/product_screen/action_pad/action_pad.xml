@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="cleancraft_pos.ActionpadWidget" t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('pay-order-button')]" position="after">
+            <button class="pay validation pay-order-button btn-secondary"
+                    t-attf-class="{{getMainButtonClasses()}}"
+                    t-att-class="{ 'with-more-button': props.onClickMore and ui.isSmall }"
+                    t-on-click="props.actionToTrigger ? this.props.actionToTrigger : () => this.validateOrder(pos)">
+                <div class="pay-circle d-flex align-items-center justify-content-center py-2 mb-2">
+                    <i class="oi oi-chevron-right" role="img" aria-label="Pay" title="Pay"/>
+                </div>
+                <!--                <t class="text-white" t-esc="props.actionName" />-->
+                <div>Place Order</div>
+            </button>
+        </xpath>
+        <xpath expr="//button[hasclass('set-partner')]" position="after">
+            <button class="button btn btn-light rounded-0 py-2 flex-shrink-1 fw-bolder" t-on-click="_onDeliveryInfo">
+                <div class="d-flex justify-content-center align-items-center ">
+                    <span class="d-flex justify-content-center align-items-center rounded-circle me-2 text-bg-dark"
+                      t-if="!ui.isSmall" style="height: 32px;width: 32px;min-width: 32px;">
+                        <i class="fa fa-info" role="img" aria-label="Delivery Information" title="Delivery Information"/>
+                    </span>
+                    <div>
+                        Delivery Information
+                    </div>
+                </div>
+            </button>
+        </xpath>
+    </t>
+</templates>

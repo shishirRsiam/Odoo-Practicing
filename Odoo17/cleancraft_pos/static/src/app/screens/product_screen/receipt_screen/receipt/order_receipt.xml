@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="cleancraft_pos.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//ReceiptHeader" position="before">
+            <t t-if="props.data.draft">
+                <div style="position: relative;">
+                    <div class="x_ribbon x_ribbon-top-right pos-receipt-right-align">
+                        <span style="background: red">UNPAID</span>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <div style="position: relative;">
+                    <div class="x_ribbon x_ribbon-top-right pos-receipt-right-align">
+                        <span style="background: green">PAID</span>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>
